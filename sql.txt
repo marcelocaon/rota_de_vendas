@@ -1,0 +1,12 @@
+select vendedor, bairro, cidade from clientes where visita = :mrota and vendedor in (2, 30, 45, 39) group by bairro, cidade, vendedor order by vendedor, cidade, bairro
+
+
+sendo:
+0000000 = dias da visita
+por exemplo, 
+1000000 = segunda feira
+
+
+SQL que pega a lista de clientes por vendedor contando quantos clientes tem em cada bairro por dia de visita e com data de compra
+maior que a data informada.
+select a.vendedor, count(a.bairro) as Qtd, a.bairro, a.cidade from clientes a where a.visita = :mrota and a.vendedor in (2, 30, 45, 39) and a.codcli in (select b.codcli from vendaca b where b.data > :mdata) group by a.bairro, a.cidade, a.vendedor order by a.vendedor, a.bairro
